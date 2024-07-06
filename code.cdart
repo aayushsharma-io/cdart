@@ -1,0 +1,10 @@
+import cdutils
+import cdfunctions
+
+let age = 20
+
+if (age >= 18) {
+    state("You are an adult")
+} else {
+    state("You are a minor")
+}
