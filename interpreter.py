@@ -1,8 +1,6 @@
-# interpreter.py
-
 import tkinter as tk
-from functions import import_module, declare_variable, execute_state
 from multiprocessing import Process
+from handlers import handle_state, handle_state_int, handle_let_declaration
 
 class CDARTInterpreterApp:
     def __init__(self, master):
@@ -37,14 +35,13 @@ class CDARTInterpreterApp:
                 module = line.split(' ')[1].strip().rstrip(';')  # Remove semicolon from module name
                 output += import_module(module) + '\n'
             elif line.startswith('let'):
-                parts = line.split('=')
-                var_name = parts[0].split(' ')[1].strip()
-                var_value = parts[1].strip().rstrip(';')  # Remove semicolon from variable value
-                output += declare_variable(self.variables, var_name, var_value) + '\n'
+                output += handle_let_declaration(line, self.variables) + '\n'
+            elif line.startswith('state.int'):
+                expression = line.split('(')[1].split(')')[0].strip()
+                output += handle_state_int(expression, self.variables) + '\n'
             elif line.startswith('state'):
                 expression = line.split('(')[1].split(')')[0].strip()
-                value = execute_state(expression, self.variables)
-                output += f"Output: {value}\n"
+                output += handle_state(expression, self.variables) + '\n'
             else:
                 output += f"Error: Invalid statement '{line}'\n"
         return output
