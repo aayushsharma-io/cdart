@@ -1,0 +1,1 @@
+ python3 /home/remotikal/remotikal-dev/cdart/cdart_dev2/cli.py "$@"

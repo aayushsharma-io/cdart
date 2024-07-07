@@ -1,7 +1,5 @@
-# cdart.py
-
 import cdweb
-import interpreter
+from cdart_interpreter import run_interpreter
 
 if __name__ == '__main__':
-    interpreter.run_interpreter()
+    run_interpreter()
