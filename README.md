@@ -30,7 +30,7 @@ CDART is in the early stages of development. The following features are currentl
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/cdart.git
+    git clone https://github.com/aayushsharma-io/cdart.git
     cd cdart
     ```
 
