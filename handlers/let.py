@@ -1,7 +1,5 @@
-from functions.declare_variable import declare_variable
-
-def handle_let_declaration(line, variables):
-    parts = line.split('=')
-    var_name = parts[0].split(' ')[1].strip()
-    var_value = parts[1].strip().rstrip(';')  # Remove semicolon from variable value
-    return declare_variable(variables, var_name, var_value)
+def handle_let_declaration(variables, var_name, var_value):
+    if var_value.startswith('"') and var_value.endswith('"'):
+        var_value = var_value[1:-1]  # Remove the surrounding quotes for string values
+    variables[var_name] = var_value
+    return f"Variable '{var_name}' assigned value '{var_value}'"

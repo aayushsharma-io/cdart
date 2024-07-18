@@ -1,30 +1,28 @@
 import sys
-import os
+import tkinter as tk
 from cdart_interpreter import CDARTInterpreterApp
 
 def run_file(filename):
-    if not os.path.isfile(filename):
-        print(f"Error: File '{filename}' does not exist.")
-        return
-
     with open(filename, 'r') as file:
         code = file.read()
-
-    # Create a fake Tkinter root and CDART interpreter app
     root = tk.Tk()
     app = CDARTInterpreterApp(root)
-    
-    # Execute the code using the app's interpret function
-    result = app.interpret(code)
-    print(result)
+    app.input_text.insert(tk.END, code)
+    app.execute_code()
+    root.mainloop()
 
 def main():
-    if len(sys.argv) < 3 or sys.argv[1] != 'run':
-        print("Usage: cdart run <filename.cdart>")
+    if len(sys.argv) != 3:
+        print("Usage: cdart run <filename>")
         return
 
+    command = sys.argv[1]
     filename = sys.argv[2]
-    run_file(filename)
 
-if __name__ == '__main__':
+    if command == "run":
+        run_file(filename)
+    else:
+        print("Unknown command")
+
+if __name__ == "__main__":
     main()
